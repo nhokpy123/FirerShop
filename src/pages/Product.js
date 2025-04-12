@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Skeleton from "react-loading-skeleton";
 import { Link, useParams } from "react-router-dom";
-import Marquee from "react-fast-marquee";
+// import Marquee from "react-fast-marquee";
 import { useDispatch } from "react-redux";
 import { addCart } from "../redux/action";
 
@@ -10,9 +10,9 @@ import { Footer, Navbar } from "../components";
 const Product = () => {
   const { id } = useParams();
   const [product, setProduct] = useState([]);
-  const [similarProducts, setSimilarProducts] = useState([]);
+  // const [similarProducts, setSimilarProducts] = useState([]);
   const [loading, setLoading] = useState(false);
-  const [loading2, setLoading2] = useState(false);
+  // const [loading2, setLoading2] = useState(false);
 
   const dispatch = useDispatch();
 
@@ -23,17 +23,17 @@ const Product = () => {
   useEffect(() => {
     const getProduct = async () => {
       setLoading(true);
-      setLoading2(true);
-      const response = await fetch(`https://fakestoreapi.com/products/${id}`);
+      // setLoading2(true);
+      const response = await fetch(`https://api-shop-render.onrender.com/api/products/getProductById/${id}`);
       const data = await response.json();
       setProduct(data);
       setLoading(false);
-      const response2 = await fetch(
-        `https://fakestoreapi.com/products/category/${data.category}`
-      );
-      const data2 = await response2.json();
-      setSimilarProducts(data2);
-      setLoading2(false);
+      // const response2 = await fetch(
+      //   `https://fakestoreapi.com/products/category/${data.category}`
+      // );
+      // const data2 = await response2.json();
+      // setSimilarProducts(data2);
+      // setLoading2(false);
     };
     getProduct();
   }, [id]);
@@ -100,80 +100,80 @@ const Product = () => {
     );
   };
 
-  const Loading2 = () => {
-    return (
-      <>
-        <div className="my-4 py-4">
-          <div className="d-flex">
-            <div className="mx-4">
-              <Skeleton height={400} width={250} />
-            </div>
-            <div className="mx-4">
-              <Skeleton height={400} width={250} />
-            </div>
-            <div className="mx-4">
-              <Skeleton height={400} width={250} />
-            </div>
-            <div className="mx-4">
-              <Skeleton height={400} width={250} />
-            </div>
-          </div>
-        </div>
-      </>
-    );
-  };
+  // const Loading2 = () => {
+  //   return (
+  //     <>
+  //       <div className="my-4 py-4">
+  //         <div className="d-flex">
+  //           <div className="mx-4">
+  //             <Skeleton height={400} width={250} />
+  //           </div>
+  //           <div className="mx-4">
+  //             <Skeleton height={400} width={250} />
+  //           </div>
+  //           <div className="mx-4">
+  //             <Skeleton height={400} width={250} />
+  //           </div>
+  //           <div className="mx-4">
+  //             <Skeleton height={400} width={250} />
+  //           </div>
+  //         </div>
+  //       </div>
+  //     </>
+  //   );
+  // };
 
-  const ShowSimilarProduct = () => {
-    return (
-      <>
-        <div className="py-4 my-4">
-          <div className="d-flex">
-            {similarProducts.map((item) => {
-              return (
-                <div key={item.id} className="card mx-4 text-center">
-                  <img
-                    className="card-img-top p-3"
-                    src={item.image}
-                    alt="Card"
-                    height={300}
-                    width={300}
-                  />
-                  <div className="card-body">
-                    <h5 className="card-title">
-                      {item.title.substring(0, 15)}...
-                    </h5>
-                  </div>
-                  {/* <ul className="list-group list-group-flush">
-                    <li className="list-group-item lead">${product.price}</li>
-                  </ul> */}
-                  <div className="card-body">
-                    <Link
-                      to={"/product/" + item.id}
-                      className="btn btn-dark m-1"
-                    >
-                      Buy Now
-                    </Link>
-                    <button
-                      className="btn btn-dark m-1"
-                      onClick={() => addProduct(item)}
-                    >
-                      Add to Cart
-                    </button>
-                  </div>
-                </div>
-              );
-            })}
-          </div>
-        </div>
-      </>
-    );
-  };
+  // const ShowSimilarProduct = () => {
+  //   return (
+  //     <>
+  //       <div className="py-4 my-4">
+  //         <div className="d-flex">
+  //           {similarProducts.map((item) => {
+  //             return (
+  //               <div key={item.id} className="card mx-4 text-center">
+  //                 <img
+  //                   className="card-img-top p-3"
+  //                   src={item.image}
+  //                   alt="Card"
+  //                   height={300}
+  //                   width={300}
+  //                 />
+  //                 <div className="card-body">
+  //                   <h5 className="card-title">
+  //                     {item.title.substring(0, 15)}...
+  //                   </h5>
+  //                 </div>
+  //                 {/* <ul className="list-group list-group-flush">
+  //                   <li className="list-group-item lead">${product.price}</li>
+  //                 </ul> */}
+  //                 <div className="card-body">
+  //                   <Link
+  //                     to={"/product/" + item.id}
+  //                     className="btn btn-dark m-1"
+  //                   >
+  //                     Buy Now
+  //                   </Link>
+  //                   <button
+  //                     className="btn btn-dark m-1"
+  //                     onClick={() => addProduct(item)}
+  //                   >
+  //                     Add to Cart
+  //                   </button>
+  //                 </div>
+  //               </div>
+  //             );
+  //           })}
+  //         </div>
+  //       </div>
+  //     </>
+  //   );
+  //     };
   return (
     <>
       <Navbar />
       <div className="container">
         <div className="row">{loading ? <Loading /> : <ShowProduct />}</div>
-        <div className="row my-5 py-5">
+        {/* <div className="row my-5 py-5">
           <div className="d-none d-md-block">
           <h2 className="">You may also Like</h2>
             <Marquee
@@ -184,7 +184,7 @@ const Product = () => {
               {loading2 ? <Loading2 /> : <ShowSimilarProduct />}
             </Marquee>
           </div>
-        </div>
+        </div> */}
       </div>
       <Footer />
     </>

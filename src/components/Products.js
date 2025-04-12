@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
-import { addCart } from "../redux/action";
 
+import { addCart } from "../redux/action";
 import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
 
@@ -22,7 +22,7 @@ const Products = () => {
   useEffect(() => {
     const getProducts = async () => {
       setLoading(true);
-      const response = await fetch("https://fakestoreapi.com/products/");
+      const response = await fetch("https://api-shop-render.onrender.com/api/products/getAllProduct");
       if (componentMounted) {
         setData(await response.clone().json());
         setFilter(await response.json());
@@ -65,10 +65,14 @@ const Products = () => {
     );
   };
 
+
+  
   const filterProduct = (cat) => {
     const updatedList = data.filter((item) => item.category === cat);
     setFilter(updatedList);
   }
+
+  //Loc. san? pham?
   const ShowProducts = () => {
     return (
       <>
