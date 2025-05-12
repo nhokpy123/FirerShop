@@ -19,7 +19,7 @@ function Register() {
 
     const handleRegister = async (values, { setSubmitting, setStatus }) => {
         try {
-            await axios.post('https://api-shop-uy38.onrender.com/api/auth/register', {
+            await axios.post('https://api-shop-render.onrender.com/api/auth/register', {
                 username: values.username,
                 email: values.email,
                 password: values.password,

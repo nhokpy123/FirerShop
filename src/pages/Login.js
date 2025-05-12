@@ -19,7 +19,7 @@ function Login() {
   const handleLogin = async (values, { setSubmitting, setStatus }) => {
     try {
       const res = await axios.post(
-        "https://api-shop-uy38.onrender.com/api/auth/login",
+        "https://api-shop-render.onrender.com/api/auth/login",
         {
           email: values.email,
           password: values.password,
